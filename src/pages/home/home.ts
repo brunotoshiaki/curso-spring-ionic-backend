@@ -15,28 +15,27 @@ export class HomePage {
     senha: ""
   };
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public menu: MenuController,
     public auth: AuthService) {
 
   }
 
-
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
   }
+
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
 
   login() {
-    console.log(this.creds);
-    this.navCtrl.setRoot('CategoriasPage');
     this.auth.authenticate(this.creds)
       .subscribe(response => {
-        console.log(response.headers.get('Authorization'));
+        this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('CategoriasPage');
       },
-      error => {});    
+        error => { });
   }
 }
