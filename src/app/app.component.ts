@@ -27,6 +27,7 @@ export class MyApp {
     this.pages = [
       { title: 'Profile', component: 'ProfilePage' },
       { title: 'Categorias', component: 'CategoriasPage' },
+      { title: 'Carrinho', component: 'CartPage' } ,
       { title: 'Logout', component: '' }
     ];
 
@@ -34,7 +35,7 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-       this.statusBar.styleDefault();
+      this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
   }
