@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Forma de pagamento</ion-title>
+    <ion-title>Forma de Pagamento</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -15,17 +15,17 @@
         Tipo de pagamento
       </ion-list-header>
       <ion-item>
-        <ion-label>Pagamento com cartão</ion-label>
+        <ion-label>Pagamento com Cartão</ion-label>
         <ion-radio checked="true" value="pagamentoComCartao"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Pagamento com boleto</ion-label>
+        <ion-label>Pagamento com Boleto</ion-label>
         <ion-radio value="pagamentoComBoleto"></ion-radio>
       </ion-item>
     </ion-list>
 
     <ion-item *ngIf="formGroup.value['@type'] == 'pagamentoComCartao'">
-      <ion-label stacked>Parcelas no cartão</ion-label>
+      <ion-label stacked>Parcelas no Cartão</ion-label>
       <ion-select formControlName="numeroDeParcelas">
         <ion-option *ngFor="let n of parcelas; first as f" [value]="n" [selected]="f">{{n}}</ion-option>
       </ion-select>
