@@ -15,7 +15,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
 export class ProfilePage {
 
   cliente: ClienteDTO;
-  picture : string;
+  picture: string;
   cameraOn: boolean = false;
 
   constructor(
@@ -27,6 +27,10 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    this.carregarDados();
+  }
+
+  carregarDados() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
@@ -64,10 +68,25 @@ export class ProfilePage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-     this.picture = 'data:image/png;base64,' + imageData;
-     this.cameraOn = false;
+      this.picture = 'data:image/png;base64,' + imageData;
+      this.cameraOn = false;
     }, (err) => {
     });
+  }
+
+  sendPicture() {
+    this.clienteService.uploadPicture(this.picture)
+      .subscribe(response => {
+        this.picture = null;
+        this.carregarDados();
+      },
+        error => {
+
+        })
+  }
+
+  descartarImagem() {
+    this.picture = null;
   }
 
 }
