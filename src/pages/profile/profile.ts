@@ -4,8 +4,7 @@ import { StorageService } from '../../services/storage.service';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { API_CONFIG } from '../../config/api.config';
-import { CameraOptions, Camera } from '@ionic-native/camera/ngx';
-
+import { Camera} from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -17,6 +16,7 @@ export class ProfilePage {
   cliente: ClienteDTO;
   picture: string;
   cameraOn: boolean = false;
+  options:any;
 
   constructor(
     public navCtrl: NavController,
@@ -56,18 +56,20 @@ export class ProfilePage {
         error => { });
   }
 
+  
+
   getCameraPicture() {
 
     this.cameraOn = true;
 
-    const options: CameraOptions = {
+    this.options =   {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(this.options).then((imageData) => {
       this.picture = 'data:image/png;base64,' + imageData;
       this.cameraOn = false;
     }, (err) => {
